@@ -7,17 +7,33 @@ function humamFuncs()
 % @return {type} [name] description.
 % @see dependencies
 %    
-    
-    RADIUS_OUTTER = 1;
-    SIGMA_SUSTAINED_ACRYLIC = 10000000;
-    SIGMA_ACRYLIC = 2760000000;
+    ACRYLIC_DENSITY = 1180; %kg/m^3
+    RADIUS_OUTTER = 1; %m
+    SIGMA_SUSTAINED_ACRYLIC = 10000000;%Pa
+    SIGMA_ACRYLIC = 2760000000; %Pa
+    HATCH_HOLE_RADIUS = 0.3; %m
+    UTS_STAINLESS_STEEL = 448000000; %Pa
     depth = 4500; %Depth is 1000m, this term will be paramaterization value
     %P_depth = pressure_at_depth(depth);
-    t = get_thickness(depth);
-    t = t*100 + " cm"
+    [hullVolume, hullMass, hullThickness] = get_hull_thickness(depth);
+    "Hull Thickness: "+hullThickness*100 + " cm";
+    "Hull Volume: " +hullVolume + " m^3";
+    "Hull Mass: " + hullMass + " kg";
+    hatchThickness = get_hatch_thickness(hullThickness, depth);
+    "Hatch Thickness: " + hatchThickness*100 + " cm"
     
+    function output = get_hatch_thickness(hullThickness, depth)
+        p = pressure_at_depth(depth);
+        t = 0.001;
+        maxStress = UTS_STAINLESS_STEEL+1;
+        while maxStress > UTS_STAINLESS_STEEL
+            t = t + 0.0001;
+            maxStress = (p*(hullThickness*0.707+HATCH_HOLE_RADIUS)^2)/((2*0.707)*(HATCH_HOLE_RADIUS)*t);
+        end
+        output = t;
+    end
     
-    function output = get_thickness(targetDepth)
+    function [v_out, m_out, t_out] = get_hull_thickness(targetDepth)
         pressure = pressure_at_depth(targetDepth);
         thickness = 0.0001;
         stress = hull_stress(pressure, thickness, RADIUS_OUTTER);
@@ -27,7 +43,9 @@ function humamFuncs()
             stress = hull_stress(pressure, thickness, RADIUS_OUTTER);
             t_buckle = buckling_thickness(stress,RADIUS_OUTTER,thickness);
         end
-        output = thickness;
+        m_out = ((4/3)*3.14*RADIUS_OUTTER^3 - (4/3)*3.14*(RADIUS_OUTTER-thickness)^3)*ACRYLIC_DENSITY;
+        v_out = (4/3)*3.14*RADIUS_OUTTER^3;
+        t_out = thickness;
     end
     
     function sigma_hull = hull_stress(p,t,r)
