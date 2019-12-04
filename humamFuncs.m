@@ -11,7 +11,7 @@ function humamFuncs()
     ROOT_2 = 1.41421356237;
     EPDM_YOUNGS_MODULUS = 6000000; % Pa
     GASKET_COMPRESSION_RATIO = 0.2;
-    SAFETY_FACTOR_HULL = 4;
+    SAFETY_FACTOR_HULL = 3;
     SAFETY_FACTOR_HATCH = 3;
     ACRYLIC_DENSITY = 1180; %kg/m^3
     RADIUS_OUTTER = 1; %m
@@ -71,13 +71,13 @@ function humamFuncs()
     function sigma_hull = hull_stress(p,t,r)
         psi = 0.01;
         theta = 0.01;
-        sigma_hull = (p*(t+r)*(t+r)*psi*theta)/(6*((t^2)+2*r*t)*(psi+theta)^2);
+        sigma_hull = (p*(t+r)*(t+r)*psi*theta)/(4*((t^2)+2*r*t)*(psi+theta)^2);
     end
 
     
     function t_buckle = buckling_thickness(stress, r, t,sigma)
         p_cr = stress*(t*t);
-        t_buckle = ((6*r*r*p_cr)/(sigma))^0.25;
+        t_buckle = ((6*r*r*p_cr)/(8*sigma))^0.25;
     end
     
 %     function dif = percentDifference(x, y)
