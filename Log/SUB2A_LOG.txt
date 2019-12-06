@@ -1,6 +1,6 @@
 ***Logs***
-Thruster Name = THRUSTER_VXL
-Thruster Force = 2268.8374 kN
+Thruster Name = THRUSTER_VS
+Thruster Force = 63.0233 kN
 Hull Thickness = 177.1 mm
-There will be 4 batteries on board.
+There will be 1 batteries on board.
 The dry mass of the sub is 6231.3669 kg

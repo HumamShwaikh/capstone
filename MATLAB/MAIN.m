@@ -8,7 +8,7 @@
 % GROUP: SUB2A
 % University of Ottawa
 % Mechanical Engineering
-% Latest Revision: 4/12/2019
+% Latest Revision: 2019-12-06
 
 % =========================================================================
 % SOFTWARE DESCRIPTION
@@ -100,12 +100,22 @@ set(handles.TXT_Speed,'String',num2str(Default_speed));
 Default_diving_time=1;
 set(handles.TXT_Time,'String',num2str(Default_diving_time));
 
+axes(handles.axes1)
+smileg=imread('IsoFinalSub.png');
+handles.axes1 = image(smileg);
+axis off
+axis image
+imshow(smileg)
+
+guidata(hObject, handles);
+
 %Set the window title with the group identification:
 set(handles.figure1,'Name','Group SUB2A // CADCAM 2019');
 
 %Add the 'subfunctions' folder to the path so that subfunctions can be
 %accessed
 addpath('Subfunctions');
+
 
 % =========================================================================
 

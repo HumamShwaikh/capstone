@@ -58,9 +58,9 @@
 
 "hatchEdgeToTop"=76.7095mm
 
-"mountAngle"=70.9702deg
+"mountAngle"=15.2242deg
 
-"ThrusterDim"=160.5mm
+"ThrusterDim"=75mm
 
 "FrameHight"=2500mm
 
