@@ -1,0 +1,24 @@
+﻿"mbtOD" = 500
+"mbtT" = 6
+"mbtL" = 3000
+"mbtFlangeOD" = 650
+"mbtFlangeT" = 12
+"mbtFlangeBoltCircleDia" = 650
+"mbtFlangeHoleDia" = 12
+"mbtOringSize" = 10 
+"mbtOringDia" = 620
+"mbtWidth" = 2250
+"skiWidth" = 1250
+"mbtCapL" = 500
+
+"vbtRearOD" = 800
+"vbtRearT" = 6.25
+"vbtRearFlangeOD" = 900
+"vbtRearFlangeT" = 12
+"vbtRearBoltHoleDia" = 12
+
+"vbtFrontOD" = 440
+"vbtFrontT" = 25
+"vbtFrontFlangeOD" = 510
+"vbtFrontFlangeT" = 12
+"vbtFrontBoltHoleDia" = 12

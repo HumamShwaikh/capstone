@@ -1,0 +1,3 @@
+﻿"mountAngle" = 30deg
+"ThrusterDim"= 140mm
+"FrameHight"= 2500

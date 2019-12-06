@@ -1,0 +1,2 @@
+"hatchMinima"=0.0362
+"Thruster Diameter"=321
