@@ -39,7 +39,7 @@ function varargout = MAIN(varargin)
 
 % Edit the above text to modify the response to help MAIN
 
-% Last Modified by GUIDE v2.5 04-Dec-2019 18:30:05
+% Last Modified by GUIDE v2.5 06-Dec-2019 02:23:12
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -95,9 +95,10 @@ guidata(hObject, handles);
 clc
 Default_diving_depth=500;
 set(handles.TXT_Diving_Depth,'String',num2str(Default_diving_depth));
-
-set(handles.Max_Speed,'Value',1); %The 1st item of the list is selected. Change the list from the GUIDE.
-set(handles.TXT_Dive_Time,'String','12');
+% Default_speed=3;
+% set(handles.TXT_Speed,'String',num2str(Default_speed));
+% Default_diving_time=6;
+% set(handles.TXT_Diving_Depth,'String',num2str(Default_diving_time));
 
 %Set the window title with the group identification:
 set(handles.figure1,'Name','Group SUB2A // CADCAM 2019');
@@ -118,25 +119,15 @@ if(isempty(handles))
     Wrong_File();
 else
     %Get the design parameters from the interface (DO NOT PERFORM ANY DESIGN CALCULATIONS HERE)
-    
-    
-    %returns Max_Speed contents as cell array
-    COMBOcontents = cellstr(get(handles.Max_Speed,'String')); 
+    %Returns Max depth
+    depth = get(handles.slider_depth,'Value');
     %returns selected item from Max_Speed
-    number_of_weights = str2double(COMBOcontents{get(handles.Max_Speed,'Value')}); 
+    speed = get(handles.slider_speed,'Value');
     %returns input value of shaft length text box 
-    shaft_length = str2double(get(handles.TXT_Dive_Time,'String'));
-
-    %Perform basic range checking (for those that can go out of range)
-    if isnan(shaft_length) || (shaft_length <=0) || (shaft_length > 50)
-        msgbox('The shaft length specified is not an acceptable value. Please correct it.','Cannot generate!','warn');
-        return;
-    end
-    %The design calculations are done within this function. This function is in the file Design_code.m
-    
+    time = get(handles.slider_time,'Value');
 
     %Show the results on the GUI.
-    log_file = 'H:\groupABC\Log\groupABC_LOG.TXT';
+    log_file = '..\Log\SUB2A_LOG.TXT';
     fid = fopen(log_file,'r'); %Open the log file for reading
     S=char(fread(fid)'); %Read the file into a string
     fclose(fid);
@@ -183,14 +174,14 @@ else
 
     %Apply basic testing to see if the value does not exceed the range of the
     %slider (defined in the gui)
-    if(value<get(handles.Slideraxial_force,'Min'))
-        value = get(handles.Slideraxial_force,'Min');
+    if(value<get(handles.slider_depth,'Min'))
+        value = get(handles.slider_depth,'Min');
     end
-    if(value>get(handles.Slideraxial_force,'Max'))
-        value = get(handles.Slideraxial_force,'Max');
+    if(value>get(handles.slider_depth,'Max'))
+        value = get(handles.slider_depth,'Max');
     end
     set(hObject,'String',value);
-    set(handles.Slideraxial_force,'Value',value);
+    set(handles.slider_depth,'Value',value);
 end
 
 % =========================================================================
@@ -222,8 +213,8 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 % --- Executes on slider movement.
-function Slideraxial_force_Callback(hObject, eventdata, handles) %#ok
-% hObject    handle to Slideraxial_force (see GCBO)
+function slider_depth_Callback(hObject, eventdata, handles) %#ok
+% hObject    handle to slider_depth (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
@@ -238,8 +229,8 @@ else
 end
 
 % --- Executes during object creation, after setting all properties.
-function Slideraxial_force_CreateFcn(hObject, eventdata, handles) %#ok
-% hObject    handle to Slideraxial_force (see GCBO)
+function slider_depth_CreateFcn(hObject, eventdata, handles) %#ok
+% hObject    handle to slider_depth (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -348,4 +339,48 @@ function edit8_CreateFcn(hObject, eventdata, handles)
 %       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on slider movement.
+function slider_speed_Callback(hObject, eventdata, handles)
+% hObject    handle to slider_speed (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+
+
+% --- Executes during object creation, after setting all properties.
+function slider_speed_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to slider_speed (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+% --- Executes on slider movement.
+function slider_time_Callback(hObject, eventdata, handles)
+% hObject    handle to slider_time (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+
+
+% --- Executes during object creation, after setting all properties.
+function slider_time_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to slider_time (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
 end

@@ -1,5 +1,5 @@
 %This function is the main "design" function.
-function Design_code()%time, speed, depth)
+function Design_code(time, speed, depth)
     %Check if the user tries to run this file directly
     time = 6;
     speed = 6;
