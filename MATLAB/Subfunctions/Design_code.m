@@ -1,9 +1,5 @@
 %This function is the main "design" function.
 function Design_code(time, speed, depth)
-    %Check if the user tries to run this file directly
-    time = 6;
-    speed = 6;
-    depth = 1000;
     %DESIGN CALCULATIONS done here. Feel free to use as many subfunctions as necessary.
     [thruster_Name, thruster_Force, mount_angle_xy, thruster_power, thruster_diameter] = ThrusterFunction(speed);
     [hullThickness, hatchThickness, hullVolume, hullMass, batteries] = HHGP(time, depth, thruster_power);
@@ -18,8 +14,8 @@ function Design_code(time, speed, depth)
 
     %Declaring text files to be modified
     %Files
-    log_file = '..\\..\\Log\\SUB2A_LOG.txt';
-    equation_file = '..\\..\\SolidWorks\\equations.txt';
+    log_file = 'C:\\Users\\hshwa\\Desktop\\capstone\\Log\\SUB2A_LOG.txt';
+    equation_file = 'C:\\Users\\hshwa\\Desktop\\capstone\\SolidWorks\\equations.txt';
 
     %Write the log file (NOT USED BY SOLIDWORKS, BUT USEFUL TO DEBUG PROGRAM AND REPORT RESULTS IN A CLEAR FORMAT)
     %Please only create one log file for the complete project but try to keep the file easy to read by adding blank lines and sections...
@@ -27,6 +23,7 @@ function Design_code(time, speed, depth)
     fprintf(fid, '***Logs***\n');
     fprintf(fid, 'Thruster Name = '+ thruster_Name+ '\n');
     fprintf(fid, strcat('Thruster Force =', 32, num2str(thruster_Force), ' (kN).\n'));
+    fprintf(fid, strcat('Hull Thickness =', 32, num2str(hullThickness), ' (mm).\n'));
     fprintf(fid, strcat('There will be', 32, num2str(batteries), ' batteries on board.\n'));
     fprintf(fid, strcat('We assume that the shaft is made of 1100-0 Aluminm alloy.\n'));
     %fprintf(fid, strcat('Optimized shaft diameter =', 32, num2str(new_diameter), ' (mm).\n'));

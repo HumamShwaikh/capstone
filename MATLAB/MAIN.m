@@ -39,7 +39,7 @@ function varargout = MAIN(varargin)
 
 % Edit the above text to modify the response to help MAIN
 
-% Last Modified by GUIDE v2.5 06-Dec-2019 02:23:12
+% Last Modified by GUIDE v2.5 06-Dec-2019 02:54:22
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -127,7 +127,7 @@ else
     time = get(handles.slider_time,'Value');
 
     %Show the results on the GUI.
-    log_file = '..\Log\SUB2A_LOG.TXT';
+    log_file = 'C:\Users\hshwa\Desktop\capstone\Log\SUB2A_LOG.TXT';
     fid = fopen(log_file,'r'); %Open the log file for reading
     S=char(fread(fid)'); %Read the file into a string
     fclose(fid);
@@ -377,6 +377,28 @@ function slider_time_Callback(hObject, eventdata, handles)
 % --- Executes during object creation, after setting all properties.
 function slider_time_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to slider_time (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+% --- Executes on slider movement.
+function slider7_Callback(hObject, eventdata, handles)
+% hObject    handle to slider_depth (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+
+
+% --- Executes during object creation, after setting all properties.
+function slider7_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to slider_depth (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
