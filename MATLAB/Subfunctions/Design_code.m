@@ -101,8 +101,12 @@ function Design_code(time, speed, depth)
     % "mountAngle" = mount_angle_xy
     fprintf(fid2, strcat('"mountAngle"=', num2str(mount_angle_xy), 'deg\n\n'));
     % "ThrusterDim"= thruster_diameter
-    fprintf(fid2, strcat('"ThrusterDim"=', num2str(thruster_diameter), 'mm\n\n'));
+    fprintf(fid2, strcat('"ThrusterDim"=', num2str(thruster_diameter/2), 'mm\n\n'));
     % "FrameHight"= 2500 const
     fprintf(fid2, strcat('"FrameHight"=', num2str(2500), 'mm\n\n'));
+    % "HatchShaftSeatThickness"= 20 const
+    fprintf(fid2, strcat('"HatchShaftSeatThickness"=', num2str(20), 'mm\n\n'));
+    % "collarThickness"= 20 const
+    fprintf(fid2, strcat('"collarThickness"=', num2str(20), 'mm\n\n'));
     fclose(fid2);
 end

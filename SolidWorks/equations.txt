@@ -1,34 +1,70 @@
-﻿"mountAngle" = 30deg
-"ThrusterDim"= 140mm
-"hatchHoleDiameter"= 600mm
-"hullThickness"= 120mm
-"gasketHullInterconnectWidth"= 100mm
-"collarThickness"= 15
-"hatchTunnelLength"=200
-"oRingDiameter"=2
-"boltPatternRadiusInterconnect"=500
-"interconnectBoltDiameter"=30
-"hatchShaftDiameter"=20
-"hatchMinima"=50
-"hullDiameter"=2000
-"hatchMaxima"=180
-"bushingFlatHatch"=15
-"hingePivotDiameter"=20
-"handleWidth"=250
-"handleHeight"=160
-"handleThickness"=25
-"FrameLength"= 4300
-"FrameMidLength"= 3000
-"TubeOD"= 100
-"FrameBackFlat"= 800
-"TubeWall"=15
-"TopMemberAngle"=120
-"FrameHight"= 2500
-"HatchShaftSeatThickness"= 30
-"hatchTopToDogArmCenter"=33mm
-"dogArmSize"=30
-"hatchPivotHeight"=40
-"hatchPivotDistance"=70
-"HatchORingDiameter"=2.1
-"hatchThickness"=50
-"hatchEdgeToTop"=76.7095
+"hatchHoleDiameter"=600mm
+
+"hullThickness"=177.1mm
+
+"gasketHullInterconnectWidth"=100mm
+
+"hatchHcollarThicknessoleDiameter"=20mm
+
+"hatchTunnelLength"=200mm
+
+"oRingDiameter"=2mm
+
+"boltPatternRadiusInterconnect"=500mm
+
+"interconnectBoltDiameter"=30mm
+
+"hatchShaftDiameter"=20mm
+
+"hatchMinima"=39.9mm
+
+"hullDiameter"=2240mm
+
+"hatchMaxima"=180mm
+
+"bushingFlatHatch"=15mm
+
+"hingePivotDiameter"=20mm
+
+"handleWidth"=250mm
+
+"handleHeight"=160mm
+
+"handleThickness"=25mm
+
+"hatchTopToDogArmCenter"=33mm
+
+"dogArmSize"=30mm
+
+"hatchPivotHeight"=40mm
+
+"hatchPivotDistance"=70mm
+
+"HatchORingDiameter"=2.1mm
+
+"FrameLength"=2600mm
+
+"FrameMidLength"=1800mm
+
+"TubeOD"=100mm
+
+"FrameBackFlat"=500mm
+
+"TubeWall"=15.0001mm
+
+"TopMemberAngle"=140deg
+
+"hatchThickness"=39.9mm
+
+"hatchEdgeToTop"=76.7095mm
+
+"mountAngle"=70.9702deg
+
+"ThrusterDim"=160.5mm
+
+"FrameHight"=2500mm
+
+"HatchShaftSeatThickness"=20mm
+
+"collarThickness"=20mm
+
