@@ -11,11 +11,17 @@ function Design_code(time, speed, depth)
     
     %Source: Fundamentals of Machine Component Design Robert C. Juvinall and Kurt M, Marshek, Wiley; 5th edition.
     %function testing
-
+    
+    %unit conversions
+    hullThickness = hullThickness*1000; % m to mm
+    hatchThickness = hatchThickness*1000;
+    final_OD = final_OD*1000;
+    final_tube_thickness = final_tube_thickness*1000;
+    
     %Declaring text files to be modified
     %Files
-    log_file = 'C:\\Users\\hshwa\\Desktop\\capstone\\Log\\SUB2A_LOG.txt';
-    equation_file = 'C:\\Users\\hshwa\\Desktop\\capstone\\SolidWorks\\equations.txt';
+    log_file = '..\Log\SUB2A_LOG.txt';
+    equation_file = '..\SolidWorks\equations.txt';
 
     %Write the log file (NOT USED BY SOLIDWORKS, BUT USEFUL TO DEBUG PROGRAM AND REPORT RESULTS IN A CLEAR FORMAT)
     %Please only create one log file for the complete project but try to keep the file easy to read by adding blank lines and sections...
@@ -26,14 +32,7 @@ function Design_code(time, speed, depth)
     fprintf(fid, strcat('Hull Thickness =', 32, num2str(hullThickness), ' (mm).\n'));
     fprintf(fid, strcat('There will be', 32, num2str(batteries), ' batteries on board.\n'));
     fprintf(fid, strcat('We assume that the shaft is made of 1100-0 Aluminm alloy.\n'));
-    %fprintf(fid, strcat('Optimized shaft diameter =', 32, num2str(new_diameter), ' (mm).\n'));
     fclose(fid);
-    
-    %unit conversions
-    hullThickness = hullThickness*1000; % m to mm
-    hatchThickness = hatchThickness*1000;
-    final_OD =final_OD*1000;
-    final_tube_thickness =final_tube_thickness*1000;
 
     %Write the equations file(s) (FILE(s) LINKED TO SOLIDWORKS).
     %You can make a different file for each section of your project (ie one for steering, another for brakes, etc...)

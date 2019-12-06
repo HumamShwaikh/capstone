@@ -4,7 +4,7 @@
 % =========================================================================
 % =========================================================================
 
-% Developed by: Nathaniel Mailhot
+% Developed by: Humam Shwaikh
 % GROUP: SUB2A
 % University of Ottawa
 % Mechanical Engineering
@@ -39,7 +39,7 @@ function varargout = MAIN(varargin)
 
 % Edit the above text to modify the response to help MAIN
 
-% Last Modified by GUIDE v2.5 06-Dec-2019 02:54:22
+% Last Modified by GUIDE v2.5 06-Dec-2019 03:36:54
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -95,10 +95,10 @@ guidata(hObject, handles);
 clc
 Default_diving_depth=500;
 set(handles.TXT_Diving_Depth,'String',num2str(Default_diving_depth));
-% Default_speed=3;
-% set(handles.TXT_Speed,'String',num2str(Default_speed));
-% Default_diving_time=6;
-% set(handles.TXT_Diving_Depth,'String',num2str(Default_diving_time));
+Default_speed=3;
+set(handles.TXT_Speed,'String',num2str(Default_speed));
+Default_diving_time=1;
+set(handles.TXT_Time,'String',num2str(Default_diving_time));
 
 %Set the window title with the group identification:
 set(handles.figure1,'Name','Group SUB2A // CADCAM 2019');
@@ -125,9 +125,11 @@ else
     speed = get(handles.slider_speed,'Value');
     %returns input value of shaft length text box 
     time = get(handles.slider_time,'Value');
-
+    
+    Design_code(time, speed, depth)
+    
     %Show the results on the GUI.
-    log_file = 'C:\Users\hshwa\Desktop\capstone\Log\SUB2A_LOG.TXT';
+    log_file = '..\Log\SUB2A_LOG.txt';
     fid = fopen(log_file,'r'); %Open the log file for reading
     S=char(fread(fid)'); %Read the file into a string
     fclose(fid);
@@ -260,7 +262,22 @@ function Max_Speed_Callback(hObject, eventdata, handles) %#ok
 
 % Hints: contents = cellstr(get(hObject,'String')) returns Max_Speed contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from Max_Speed
+if(isempty(handles))
+    Wrong_File();
+else
+    value = round(str2double(get(hObject,'String')));
 
+    %Apply basic testing to see if the value does not exceed the range of the
+    %slider (defined in the gui)
+    if(value<get(handles.slider_speed,'Min'))
+        value = get(handles.slider_speed,'Min');
+    end
+    if(value>get(handles.slider_speed,'Max'))
+        value = get(handles.slider_speed,'Max');
+    end
+    set(hObject,'String',value);
+    set(handles.slider_speed,'Value',value);
+end
 
 % --- Executes during object creation, after setting all properties.
 function Max_Speed_CreateFcn(hObject, eventdata, handles) %#ok
@@ -282,7 +299,22 @@ function TXT_Dive_Time_Callback(hObject, eventdata, handles) %#ok
 
 % Hints: get(hObject,'String') returns contents of TXT_Dive_Time as text
 %        str2double(get(hObject,'String')) returns contents of TXT_Dive_Time as a double
+if(isempty(handles))
+    Wrong_File();
+else
+    value = round(str2double(get(hObject,'String')));
 
+    %Apply basic testing to see if the value does not exceed the range of the
+    %slider (defined in the gui)
+    if(value<get(handles.slider_time,'Min'))
+        value = get(handles.slider_time,'Min');
+    end
+    if(value>get(handles.slider_time,'Max'))
+        value = get(handles.slider_time,'Max');
+    end
+    set(hObject,'String',value);
+    set(handles.slider_time,'Value',value);
+end
 
 % --- Executes during object creation, after setting all properties.
 function TXT_Dive_Time_CreateFcn(hObject, eventdata, handles) %#ok
@@ -350,7 +382,12 @@ function slider_speed_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
-
+if(isempty(handles))
+    Wrong_File();
+else
+    value = round(get(hObject,'Value')); %Round the value to the nearest integer
+    set(handles.TXT_Speed,'String',num2str(value));
+end
 
 % --- Executes during object creation, after setting all properties.
 function slider_speed_CreateFcn(hObject, eventdata, handles)
@@ -372,7 +409,12 @@ function slider_time_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
-
+if(isempty(handles))
+    Wrong_File();
+else
+    value = round(get(hObject,'Value')); %Round the value to the nearest integer
+    set(handles.TXT_Time,'String',num2str(value));
+end
 
 % --- Executes during object creation, after setting all properties.
 function slider_time_CreateFcn(hObject, eventdata, handles)
@@ -405,4 +447,73 @@ function slider7_CreateFcn(hObject, eventdata, handles)
 % Hint: slider controls usually have a light gray background.
 if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+
+function edit10_Callback(hObject, eventdata, handles)
+% hObject    handle to edit10 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit10 as text
+%        str2double(get(hObject,'String')) returns contents of edit10 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit10_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit10 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function TXT_Speed_Callback(hObject, eventdata, handles)
+% hObject    handle to TXT_Speed (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of TXT_Speed as text
+%        str2double(get(hObject,'String')) returns contents of TXT_Speed as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function TXT_Speed_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to TXT_Speed (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function TXT_Time_Callback(hObject, eventdata, handles)
+% hObject    handle to TXT_Time (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of TXT_Time as text
+%        str2double(get(hObject,'String')) returns contents of TXT_Time as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function TXT_Time_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to TXT_Time (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
 end

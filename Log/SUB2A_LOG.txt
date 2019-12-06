@@ -1,5 +1,6 @@
 ***Logs***
 Thruster Name = THRUSTER_VXL
 Thruster Force = 2268.8374 (kN).
-There will be 4 batteries on board.
+Hull Thickness = 79.1 (mm).
+There will be 6 batteries on board.
 We assume that the shaft is made of 1100-0 Aluminm alloy.
