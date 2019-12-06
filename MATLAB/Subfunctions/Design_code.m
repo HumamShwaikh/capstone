@@ -4,10 +4,10 @@ function Design_code(time, speed, depth)
     [thruster_Name, thruster_Force, mount_angle_xy, thruster_power, thruster_diameter] = ThrusterFunction(speed);
     [hullThickness, hatchThickness, hullVolume, hullMass, batteries] = HHGP(time, depth, thruster_power);
     [final_OD, final_ID, final_tube_thickness] = HydroStaticBucklingCode(depth);
-    [m_frame, f_weight_frame] = FrameMassCode(final_ID/1000);
-    [CoM, CoB, componentMass] = COM_COB_Function(hullThickness, final_ID/1000);
+    [m_frame, f_weight_frame] = FrameMassCode(final_ID);
+    [CoM, CoB, componentMass] = COM_COB_Function(hullThickness, final_ID);
     [Oxygen_m3, CO2_Canisters, Airflow_m3PerMin] = lifeSupportFunction(time, hullThickness);
-    LiftPointAnalysisCode(f_weight_frame + componentMass + hullMass);
+    LiftPointAnalysisCode(f_weight_frame + componentMass*9.81 + hullMass*9.81);
     
     %Source: Fundamentals of Machine Component Design Robert C. Juvinall and Kurt M, Marshek, Wiley; 5th edition.
     %function testing
@@ -15,7 +15,7 @@ function Design_code(time, speed, depth)
     %unit conversions
     hullThickness = hullThickness*1000; % m to mm
     hatchThickness = hatchThickness*1000;
-    final_OD = final_OD*1000;
+    final_OD = final_OD*1000
     final_tube_thickness = final_tube_thickness*1000;
     
     %Declaring text files to be modified
@@ -28,10 +28,10 @@ function Design_code(time, speed, depth)
     fid = fopen(log_file, 'w+t');
     fprintf(fid, '***Logs***\n');
     fprintf(fid, 'Thruster Name = '+ thruster_Name+ '\n');
-    fprintf(fid, strcat('Thruster Force =', 32, num2str(thruster_Force), ' (kN).\n'));
-    fprintf(fid, strcat('Hull Thickness =', 32, num2str(hullThickness), ' (mm).\n'));
+    fprintf(fid, strcat('Thruster Force =', 32, num2str(thruster_Force), ' kN\n'));
+    fprintf(fid, strcat('Hull Thickness =', 32, num2str(hullThickness), ' mm\n'));
     fprintf(fid, strcat('There will be', 32, num2str(batteries), ' batteries on board.\n'));
-    fprintf(fid, strcat('We assume that the shaft is made of 1100-0 Aluminm alloy.\n'));
+    fprintf(fid, strcat('The dry mass of the sub is', 32, num2str(m_frame + componentMass + hullMass), ' kg\n'));
     fclose(fid);
 
     %Write the equations file(s) (FILE(s) LINKED TO SOLIDWORKS).
